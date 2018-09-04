@@ -1,0 +1,21 @@
+{
+    "name": "rockyfc/yii2-smart-rbac",
+    "description": "Smart Rbac Manager for Yii2",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension", "rbac"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rocky",
+            "email": "softfc@163.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "smart\\rbac\\": ""
+        }
+    }
+}
