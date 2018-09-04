@@ -36,7 +36,7 @@ class RoleController extends Controller
 
     /**
      * Lists all AuthRole models.
-     * @title 角色列表a
+     * @title 角色列表
      * @return mixed
      */
     public function actionIndex()
@@ -50,27 +50,15 @@ class RoleController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single AuthRole model.
-     * @param string $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
 
     /**
      * Creates a new AuthRole model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @title 新增角色
      * @return mixed
      */
     public function actionCreate()
     {
-        //print_r($_POST);exit;
         try {
             $model = new AuthRole();
 
@@ -145,6 +133,7 @@ class RoleController extends Controller
     /**
      * Updates an existing AuthRole model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     * @title 编辑角色
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -180,6 +169,9 @@ class RoleController extends Controller
 
     }
 
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
     private function getActions()
     {
         $actions = AuthAction::find()
@@ -208,6 +200,7 @@ class RoleController extends Controller
     /**
      * Deletes an existing AuthRole model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @title 删除角色
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found

@@ -13,6 +13,7 @@ use yii\filters\VerbFilter;
 
 /**
  * UserController implements the CRUD actions for User model.
+ * @title 管理员管理
  */
 class UserController extends Controller
 {
@@ -33,6 +34,7 @@ class UserController extends Controller
 
     /**
      * Lists all User models.
+     * @title 管理员列表
      * @return mixed
      */
     public function actionIndex()
@@ -46,22 +48,11 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single User model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
 
     /**
      * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @title 新增管理员
      * @return mixed
      */
     public function actionCreate()
@@ -98,6 +89,7 @@ class UserController extends Controller
     /**
      * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     * @title 编辑管理员
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -107,7 +99,7 @@ class UserController extends Controller
         $user = $this->findModel($id);
         $model = new SignupForm();
 
-        $model->load(['user'=>$user->toArray()],'user');
+        $model->load(['user' => $user->toArray()], 'user');
         $model->id = $user->id;
         $model->role_ids = $user->getRoleIds();
 
@@ -128,26 +120,19 @@ class UserController extends Controller
 
         } catch (\Exception $e) {
             if (Yii::$app->request->isPost) {
-                Yii::$app->session->setFlash('error', $e->getMessage().$e->getTraceAsString());
+                Yii::$app->session->setFlash('error', $e->getMessage());
             }
 
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
-
-
-
-
-
-
-
-
     }
 
     /**
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @title 删除管理员
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found

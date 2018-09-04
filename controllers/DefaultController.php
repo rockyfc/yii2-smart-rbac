@@ -6,6 +6,7 @@ use yii\web\Controller;
 
 /**
  * Default controller for the `rbac` module
+ * @title 未使用
  */
 class DefaultController extends Controller
 {

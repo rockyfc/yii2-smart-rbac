@@ -1,31 +1,88 @@
 Smart Rbac Manager for Yii2
 ===========================
-Smart Rbac Manager for Yii2
+本应用建立在Yii2的数据结构基础之上，使用之前请先安装yii2框架的rbac推荐的数据表。
 
-Installation
+由于官方提供的rbac功能界面理解起来有一定的难度，所以在自己项目的开发中重写了一套
+RBAC。并把它分享出来。其中包括四个模块：
+- Action管理
+- 角色管理
+- 菜单管理
+- 用户授权管理
+
+在开发过程中，为了使用户能方便快速的的进行二次开发，基本代码层次和架构均同yii2框架的Module
+书写方法，代码主体代码用gii生成。并且未对view层做过多修饰，必要时可自行调整。
+
+
+安装方法
 ------------
 
-The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+推荐使用 [composer](http://getcomposer.org/download/) 安装
 
-Either run
+或者运行以下命令
 
 ```
 php composer.phar require --prefer-dist rockyfc/yii2-smart-rbac "*"
 ```
 
-or add
+或者将以下代码写进你的`composer.json` 文件中执行
 
 ```
 "rockyfc/yii2-smart-rbac": "*"
 ```
 
-to the require section of your `composer.json` file.
+使用方法
+-----------
 
-
-Usage
------
-
-Once the extension is installed, simply use it in your code by  :
+将以下代码添加到你的配置文件中
 
 ```php
-<?= \smart\rbac\AutoloadExample::widget(); ?>```
+"modules" => [
+    'rbac' => [
+        'class' => 'smart\rbac\Module',
+        
+        //有些Module你并不想添加权限判断，则把它写在这里
+        'skipOn' => ['debug','gii'], 
+    ],
+]
+```
+
+
+请将菜单表导入数据库
+```mysql
+CREATE TABLE `menu` (
+  `menu_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
+  `parent_id` int(11) DEFAULT NULL COMMENT '上级菜单',
+  `menu_name` varchar(50) NOT NULL COMMENT '菜单名称',
+  `url` varchar(300) NOT NULL DEFAULT '' COMMENT '链接地址',
+  `icon` varchar(100) DEFAULT NULL COMMENT '菜单icon图',
+  `create_at` int(11) DEFAULT NULL COMMENT '创建时间',
+  `update_at` int(11) NOT NULL COMMENT '更新时间',
+  `action_id` varchar(100) DEFAULT NULL COMMENT '当前菜单关联的actionId',
+  `order_by` int(11) NOT NULL DEFAULT '0' COMMENT '排序值，越大越靠前',
+  `status` int(1) NOT NULL DEFAULT '2' COMMENT '是否可用1：不可用 2：可用',
+  PRIMARY KEY (`menu_id`) 
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='后台菜单管理表';
+```
+
+另外还需要安装yii2自带的rbac的数据表，请自行导入
+
+```
+yiisoft/yii2/rbac/migrations/schema-mysql.sql
+```
+
+访问方法
+------------
+
+- 访问ction列表 http://xxxx.com/rbac/rbac/action/index
+- 访问Menu列表 http://xxxx.com/rbac/rbac/menu/index
+- 访问用户列表 http://xxxx.com/rbac/rbac/user/index
+- 访问角色列表 http://xxxx.com/rbac/rbac/role/index
+
+
+
+
+
+
+
+
+

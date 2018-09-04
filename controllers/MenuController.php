@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
 
 /**
  * MenuController implements the CRUD actions for Menu model.
+ * @title 菜单管理
  */
 class MenuController extends Controller
 {
@@ -34,6 +35,7 @@ class MenuController extends Controller
 
     /**
      * Lists all Menu models.
+     * @title 菜单列表
      * @return mixed
      */
     public function actionIndex()
@@ -47,22 +49,11 @@ class MenuController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Menu model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
 
     /**
      * Creates a new Menu model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @title 新增菜单
      * @return mixed
      */
     public function actionCreate()
@@ -133,6 +124,7 @@ class MenuController extends Controller
     /**
      * Updates an existing Menu model.
      * If update is successful, the browser will be redirected to the 'view' page.
+     * @title 编辑菜单
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -155,6 +147,7 @@ class MenuController extends Controller
     /**
      * Deletes an existing Menu model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @title 删除菜单
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -183,6 +176,11 @@ class MenuController extends Controller
     }
 
 
+    /**
+     * @param $url
+     * @return array|bool|null|\yii\db\ActiveRecord
+     * @throws UserException
+     */
     protected function getActionByRoute($url)
     {
         if (empty($url)) {
@@ -206,12 +204,6 @@ class MenuController extends Controller
         }
 
         return AuthAction::find()->select('name')->where($condition)->one();
-
-        if (!$Action) {
-            throw new UserException('没有找到对应的路由');
-
-        }
-        return $Action;
 
     }
 
