@@ -20,7 +20,8 @@ class AuthRule extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'auth_rule';
+        //return 'auth_rule';
+        return Yii::$app->authManager->ruleTable;
     }
 
     /**

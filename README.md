@@ -36,18 +36,42 @@ php composer.phar require --prefer-dist rockyfc/yii2-smart-rbac "*"
 将以下代码添加到你的配置文件中
 
 ```php
+
+//权限管理组件
+'components' => [
+    
+    ...其他组件
+    
+    "authManager" => [
+        // yii\rbac\DbManager的增强版
+        "class" => 'app\smart\rbac\components\DbManager', 
+        "defaultRoles" => ["guest"],
+        
+        //菜单表名称
+        "menuTable" => 'smart_menu',
+    
+        //可以绑定角色的用户表名称
+        "userTable" => 'user', 
+    ],
+    
+    ...其他组件
+    
+]
+```
+
+```php
 "modules" => [
     'rbac' => [
         'class' => 'smart\rbac\Module',
         
-        //有些Module你并不想添加权限判断，则把它写在这里
+        //有些Module你并不想添加权限判断，则把它过滤掉
         'skipOn' => ['debug','gii'], 
     ],
 ]
 ```
 
 
-请将菜单表导入数据库
+请将菜单表导入数据库（表名称可自定义）
 ```mysql
 CREATE TABLE `menu` (
   `menu_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
@@ -61,14 +85,13 @@ CREATE TABLE `menu` (
   `order_by` int(11) NOT NULL DEFAULT '0' COMMENT '排序值，越大越靠前',
   `status` int(1) NOT NULL DEFAULT '2' COMMENT '是否可用1：不可用 2：可用',
   PRIMARY KEY (`menu_id`) 
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='后台菜单管理表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='菜单管理表';
 ```
 
-另外还需要安装yii2自带的rbac的数据表，请自行导入
 
-```
-yiisoft/yii2/rbac/migrations/schema-mysql.sql
-```
+我们将 ```@vendor\yiisoft\yii2\rbac\migrations\schema-mysql.sql``` 文件导入数据库，或者通过可视化管理工具、手动等方式创建改文件中的数据表。
+
+
 
 访问方法
 ------------

@@ -24,7 +24,8 @@ class AuthAction extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'auth_item';
+        //return 'auth_item';
+        return Yii::$app->authManager->itemTable;
     }
 
     /**

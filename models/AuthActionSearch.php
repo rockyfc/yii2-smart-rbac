@@ -134,7 +134,7 @@ class AuthActionSearch extends AuthAction
                             if ($methods) {
                                 foreach ($methods as $method) {
                                     if (!preg_match("/^action/", $method->name)
-                                        or $method->name === 'actionClientValidate'
+                                        //or $method->name === 'actionClientValidate'
                                         or $method->name === 'actions'
                                     ) {
                                         //echo $method->name."<br/>";

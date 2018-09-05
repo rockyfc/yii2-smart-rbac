@@ -37,7 +37,9 @@ class Menu extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'smart_menu';
+        //return 'smart_menu';
+        return Yii::$app->authManager->menuTable;
+
     }
 
     /**
