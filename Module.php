@@ -12,7 +12,7 @@ class Module extends \yii\base\Module
      * 不需要纳入权限管理的Module
      * @var array
      */
-    public $skipOn = ['gii', 'debug'];
+    public $skipOn = [];
 
     /**
      * {@inheritdoc}

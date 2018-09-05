@@ -164,7 +164,7 @@ class AuthActionSearch extends AuthAction
                                     $moduleTitle = empty($moduleTitle)?$moduleId:$moduleTitle;
                                     $actionTitle = empty($actionTitle) ? $actionId : $actionTitle;
                                     $ctrlTitle = empty($ctrlTitle) ? $controllerId : $ctrlTitle;
-                                    $model->description = $moduleTitle . ' - ' . $ctrlTitle . ' - ' . $actionTitle;
+                                    $model->description = $moduleTitle . ' / ' . $ctrlTitle . ' / ' . $actionTitle;
 
                                     if (!empty($model->getDirtyAttributes()) and $model->save(false)) {
                                         $model->updated_at = time();

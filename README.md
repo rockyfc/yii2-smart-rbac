@@ -2,8 +2,10 @@ Smart Rbac Manager for Yii2
 ===========================
 本应用建立在Yii2的数据结构基础之上，使用之前请先安装yii2框架的rbac推荐的数据表。
 
-由于官方提供的rbac功能界面理解起来有一定的难度，所以在自己项目的开发中重写了一套
-RBAC。并把它分享出来。其中包括四个模块：
+网上提供的rbac功能界面理解起来有一定的难度，所以在项目中开发中重写了一套
+RBAC。并把它分享出来。
+
+其中包括四个模块：
 - Action管理
 - 角色管理
 - 菜单管理
@@ -44,11 +46,11 @@ php composer.phar require --prefer-dist rockyfc/yii2-smart-rbac "*"
     
     "authManager" => [
         // yii\rbac\DbManager的增强版
-        "class" => 'app\smart\rbac\components\DbManager', 
+        "class" => 'smart\rbac\components\DbManager', 
         "defaultRoles" => ["guest"],
         
         //菜单表名称
-        "menuTable" => 'smart_menu',
+        "menuTable" => 'menu',
     
         //可以绑定角色的用户表名称
         "userTable" => 'user', 
@@ -102,6 +104,30 @@ CREATE TABLE `menu` (
 - 访问角色列表 http://xxxx.com/rbac/rbac/role/index
 
 
+@title标签的使用
+--------------
+
+当你访问action列表的时候，如果"描述"列直接显示Action不够直观的话，可以在编写controller的时候给class和function的注释加上@title标签，重新"刷新"action列表就可以看到中文了。
+
+```php
+/**
+ *
+ * @title 这里填写Controller标题
+ */
+class UserController extends Controller{
+
+    /**
+     * @title 这是action标题
+     */
+    public function actionIndex()
+    {
+       ...
+    }
+}
+```
+
+
+你也可以给Module class添加`@title`，方法同上。
 
 
 

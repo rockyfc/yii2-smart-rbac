@@ -133,7 +133,7 @@ class AuthAction extends \yii\db\ActiveRecord
      */
     public static function parseDescription($description)
     {
-        $tmp = explode('-', $description);
+        $tmp = explode('/', $description);
         $row = [];
         $row['module_title'] = trim($tmp['0']);
         $row['ctrl_title'] = trim($tmp['1']);
